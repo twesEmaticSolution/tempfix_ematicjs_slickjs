@@ -16,66 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    <script>    
-        (function(i,s,o,g,r,a,m){i['EmaticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://api.ematicsolutions.com/v1/ematic.min.js','ematics');
-
-        var opt = {
-        country_iso: "TW",
-        currency_iso: "TWD",
-        language_iso: "en",
-        };
-
-        ematics("create", "e27f3f71fcf311e8a93d0242ac110002-sg2", opt);
-
-        var loginEmail = "";
-        var ematicId = localStorage.getItem("ematicId") || "";
-
-        if (loginEmail) {
-        localStorage.setItem("ematicId", loginEmail);
-        ematicId = loginEmail;
-        }
-
-        if (ematicId) {
-        if ( /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/.test(ematicId)) {
-            opt.email = ematicId;
-            ematics("subscribe", "10246125", ematicId, {}, function () {/*pass*/ });
-        }
-        }
-
-        var product = {
-        id: "17905K",
-        price: "390",
-        misc1: "390",
-        quantity: 1,
-        name: "無可比擬 Tactel®透氣排汗低腰內褲 M-3XL myBRA",
-        brandName: "NALLA",
-        priceNumber:1,
-        priceCurrency:"TWD",
-        imageUrl: "https://fs2.my-bras.com/upload/ftp/00_Product/7905K0BL-207-1.jpg",
-        link: "https://preview.matrixec.tw/mybra/product_detail.php?product_sn=5410",
-        };
-
-        var productDiscountPrice = document.getElementsByClassName('sale_price_value')[0];
-
-            if (productDiscountPrice) {
-            product.misc1 = productDiscountPrice.innerText.trim();
-            }
-        var productPrice = document.getElementsByClassName("original_price_value")[0];
-            if (productPrice) {
-            if(productPrice.innerText.length != 0){
-            product.price = productPrice.innerText.trim();
-            } else {
-            product.price = product.misc1;
-            }
-            }
-
-        if (product.id.length) {
-        ematics("log", "product", "browse", [product]);
-        }
-    </script>
+    
 
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 </head>
@@ -126,5 +67,120 @@
         });
       });
     </script>
+    <script>
+        // 請放在每一頁
+        window.addEventListener('load', function() {    
+          (function(i,s,o,g,r,a,m){i['EmaticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://api.ematicsolutions.com/v1/ematic.min.js','ematics');
+      
+          var opt = {
+            country_iso: "TW",
+            currency_iso: "TWD",
+            language_iso: "en",
+          };
+      
+          ematics("create", "e27f3f71fcf311e8a93d0242ac110002-sg2", opt);
+      
+          var loginEmail = "";
+          var ematicId = localStorage.getItem("ematicId") || "";
+      
+          if (loginEmail) {
+            localStorage.setItem("ematicId", loginEmail);
+            ematicId = loginEmail;
+          }
+      
+          if (ematicId) {
+            if ( /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/.test(ematicId)) {
+              opt.email = ematicId;
+              ematics("subscribe", "10246125", ematicId, {}, function () {/*pass*/ });
+            }
+          }    
+        });
+      </script>
+      
+      
+      
+      <!-- 在瀏覽商品時觸發 -->
+      <script>
+        // Ematic Product Browse
+        // product 變數請沿用原本程式碼
+        window.addEventListener('load', function() {
+          // 本段請沿用原本程式 -- start
+          var product = {
+            id: "199071",
+            price: "1080",
+            misc1: "1080",
+            quantity: 1,
+            name: "(二代)無可比擬 集中包覆無鋼圈內衣 A-N罩杯 myBRA",
+            brandName: "NALLA",
+            priceNumber:1,
+            priceCurrency:"TWD",
+            imageUrl: "https://fs2.my-bras.com/upload/ftp/00_Product/1990710BL-207-1.jpg",
+            link: "https://www.my-bras.com/product_detail.php?product_sn=7390",
+          };
+      
+          var productDiscountPrice = document.getElementsByClassName('sale_price_value')[0];
+          if (productDiscountPrice && parseInt(productDiscountPrice) > 0) {
+            product.misc1 = productDiscountPrice.innerText.trim();
+          }
+      
+          var productPrice = document.getElementsByClassName("original_price_value")[0];
+          if (productPrice && parseInt(productPrice) > 0) {
+            if(productPrice.innerText.length != 0){
+              product.price = productPrice.innerText.trim();
+            } else {
+              product.price = product.misc1;
+            }
+          }    
+          // 本段請沿用原本程式 -- end
+          
+          if (product && product.id!='' && product.price!=''){ 
+            ematics("log", "product", "browse", product);
+          }
+        });
+      </script>
+      
+      
+      
+      
+      <!-- https://www.my-bras.com/shopping_car.php -->
+      <script>
+        window.addEventListener('load', function() {
+          var ematicCart = [];
+          // 本段請沿用原本程式 -- start
+          var cart_product_no_list_a = "17905K,199071".split(",");
+          var cart_product_price_list_a = "390,1180".split(",");
+          var cart_product_quantity_list_a = "1,1".split(",");
+          var cart_product_name_list_a = "無可比擬 Tactel®透氣排汗低腰內褲 M-3XL myBRA,(二代)無可比擬 集中包覆無鋼圈內衣 A-N罩杯 myBRA".split(",");
+          var cart_product_pic_path_list_a = "https://fs2.my-bras.com/upload/ftp/00_Product/7905K0BL-i1000-1.jpg,https://fs2.my-bras.com/upload/ftp/00_Product/1990710GR-i1000-1.jpg".split(",");
+          var cart_product_url_list_a = "https://www.my-bras.com/product_detail.php?product_sn=5410,https://www.my-bras.com/product_detail.php?product_sn=7390".split(",");
+          // 本段請沿用原本程式 -- end
+      
+          for (var i = 0; i < cart_product_no_list_a.length; i++) {
+            var ob = {
+              id: cart_product_no_list_a[i],
+              price: cart_product_price_list_a[i],
+              quantity: parseInt(cart_product_quantity_list_a[i]),
+              name: cart_product_name_list_a[i],
+              brandName: "MyBra",
+              priceNumber:1,
+              priceCurrency:"TWD",
+              imageUrl: cart_product_pic_path_list_a[i],
+              link: cart_product_url_list_a[i],
+            };
+            if(ob.price && parseInt(ob.price) > 0){
+              ematicCart.push(ob);
+            }
+          }
+      
+          if (ematicCart.length) {
+            ematics("log", "product", "cart", ematicCart);
+            localStorage.setItem("ematicCart", JSON.stringify(ematicCart));
+          }
+        });
+      </script>
+    
 </body>
 </html>
