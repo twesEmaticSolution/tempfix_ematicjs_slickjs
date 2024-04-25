@@ -107,7 +107,8 @@
         // Ematic Product Browse
         // product 變數請沿用原本程式碼
         window.addEventListener('load', function() {
-          console.log("step 1")  
+          console.log("step 1");
+          console.log(typeof ematics)
           // 本段請沿用原本程式 -- start
           var product = {
             id: "199071",
@@ -149,6 +150,7 @@
       <script>
         window.addEventListener('load', function() {
           console.log("step 2")  
+          console.log(typeof ematics)
           var ematicCart = [];
           // 本段請沿用原本程式 -- start
           var cart_product_no_list_a = "17905K,199071".split(",");
@@ -186,8 +188,9 @@
       <!-- 結帳完成頁面 -->
       <script>
       (function() {    
-        console.log("step 3");
         window.addEventListener('load', function() {
+          console.log("step 3");
+          console.log(typeof ematics)
           var cartItems = JSON.parse(localStorage.getItem('ematicCart'));
           // ematics("log", "product", "checkout", cartItems);
           // ematics("log", "product", "convert", cartItems);
