@@ -69,11 +69,12 @@
     </script>
     <script>
         // 請放在每一頁
-        window.addEventListener('load', function() {    
+        window.addEventListener('load', function() {  
+          console.log("step 0")  
           (function(i,s,o,g,r,a,m){i['EmaticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','https://api.ematicsolutions.com/v1/ematic.min.js','ematics');
+          })(window,document,'script','//api.ematicsolutions.com/v1/ematic.min.js','ematics');
       
           var opt = {
             country_iso: "TW",
@@ -81,25 +82,24 @@
             language_iso: "en",
           };
       
-          ematics("create", "e27f3f71fcf311e8a93d0242ac110002-sg2", opt);
+          // ematics("create", "e27f3f71fcf311e8a93d0242ac110002-sg2", opt);
       
           var loginEmail = "";
           var ematicId = localStorage.getItem("ematicId") || "";
       
           if (loginEmail) {
-            localStorage.setItem("ematicId", loginEmail);
+            // localStorage.setItem("ematicId", loginEmail);
             ematicId = loginEmail;
           }
       
           if (ematicId) {
             if ( /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/.test(ematicId)) {
               opt.email = ematicId;
-              ematics("subscribe", "10246125", ematicId, {}, function () {/*pass*/ });
+              // ematics("subscribe", "10246125", ematicId, {}, function () {/*pass*/ });
             }
           }    
         });
       </script>
-      
       
       
       <!-- 在瀏覽商品時觸發 -->
@@ -107,6 +107,7 @@
         // Ematic Product Browse
         // product 變數請沿用原本程式碼
         window.addEventListener('load', function() {
+          console.log("step 1")  
           // 本段請沿用原本程式 -- start
           var product = {
             id: "199071",
@@ -135,19 +136,19 @@
             }
           }    
           // 本段請沿用原本程式 -- end
-          
+      
           if (product && product.id!='' && product.price!=''){ 
-            ematics("log", "product", "browse", product);
+            // ematics("log", "product", "browse", product);
           }
         });
       </script>
       
       
       
-      
       <!-- https://www.my-bras.com/shopping_car.php -->
       <script>
         window.addEventListener('load', function() {
+          console.log("step 2")  
           var ematicCart = [];
           // 本段請沿用原本程式 -- start
           var cart_product_no_list_a = "17905K,199071".split(",");
@@ -176,10 +177,24 @@
           }
       
           if (ematicCart.length) {
-            ematics("log", "product", "cart", ematicCart);
-            localStorage.setItem("ematicCart", JSON.stringify(ematicCart));
+            // ematics("log", "product", "cart", ematicCart);
+            // localStorage.setItem("ematicCart", JSON.stringify(ematicCart));
           }
         });
+      </script>
+      
+      <!-- 結帳完成頁面 -->
+      <script>
+      (function() {    
+        console.log("step 3");
+        window.addEventListener('load', function() {
+          var cartItems = JSON.parse(localStorage.getItem('ematicCart'));
+          // ematics("log", "product", "checkout", cartItems);
+          // ematics("log", "product", "convert", cartItems);
+          // localStorage.removeItem('ematicCart');
+          console.log('checkout');
+        });
+      })()
       </script>
     
 </body>
