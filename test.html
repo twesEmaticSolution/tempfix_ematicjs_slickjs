@@ -111,7 +111,7 @@
         // product 變數請沿用原本程式碼
         window.addEventListener('load', function() {
           console.log("step 1");
-          console.log(typeof ematics)
+          console.log(typeof window.ematics);
           // 本段請沿用原本程式 -- start
           var product = {
             id: "199071",
@@ -152,8 +152,8 @@
       <!-- https://www.my-bras.com/shopping_car.php -->
       <script>
         window.addEventListener('load', function() {
-          console.log("step 2")  
-          console.log(typeof ematics)
+          console.log("step 2");
+          console.log(typeof window.ematics);
           var ematicCart = [];
           // 本段請沿用原本程式 -- start
           var cart_product_no_list_a = "17905K,199071".split(",");
@@ -193,7 +193,7 @@
       (function() {    
         window.addEventListener('load', function() {
           console.log("step 3");
-          console.log(typeof ematics)
+          console.log(typeof window.ematics);
           var cartItems = JSON.parse(localStorage.getItem('ematicCart'));
           // ematics("log", "product", "checkout", cartItems);
           // ematics("log", "product", "convert", cartItems);
